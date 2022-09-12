@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   View,
   Text,
@@ -7,7 +8,18 @@ import {
   Pressable,
 } from "react-native";
 
-function UserLogin() {
+function UserLogin({ navigation }) {
+  const [userName, setUserName] = useState("");
+
+  // function userInputHandler() {
+  //   setUserName()
+  // }
+
+  function pressHandler() {
+    navigation.navigate("GamesList", {
+      userName: userName,
+    });
+  }
   return (
     <View style={styles.container}>
       <View style={styles.greetingsContainer}>
@@ -20,6 +32,7 @@ function UserLogin() {
             style={styles.inputBox}
             maxLength={30}
             placeholder={"Type your username.."}
+            onChangeText={(text) => setUserName(text)}
           ></TextInput>
         </View>
         <View style={styles.usernameContainer}>
@@ -38,6 +51,7 @@ function UserLogin() {
               ? [styles.loginButton, styles.pressed]
               : [styles.loginButton]
           }
+          onPress={pressHandler}
         >
           <Text style={styles.buttonText}>LOGİN</Text>
         </Pressable>

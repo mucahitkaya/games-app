@@ -8,7 +8,11 @@ import {
   Image,
 } from "react-native";
 
-export default function GameList(params) {
+function GameList({ navigation, route }) {
+  const userName = route.params.userName;
+  function pressHandler() {
+    navigation.navigate("FindTwin");
+  }
   return (
     <View style={styles.container}>
       <View style={styles.userContainer}>
@@ -16,14 +20,14 @@ export default function GameList(params) {
           {/* <Image source={require("/assets.asdasd...")}/> */}
         </View>
         <View style={styles.userNameContainer}>
-          <Text style={styles.userNameText}>Mücahit KAYA</Text>
+          <Text style={styles.userNameText}>{userName}</Text>
         </View>
       </View>
       <View style={styles.gamesContainer}>
         <View>
           <Text style={styles.suggestText}>Lütfen bir oyun seçiniz</Text>
         </View>
-        <Pressable>
+        <Pressable onPress={pressHandler}>
           <View style={styles.gameContainer}>
             <Text style={styles.gameText}>Find-Twin</Text>
           </View>
@@ -47,6 +51,7 @@ export default function GameList(params) {
     </View>
   );
 }
+export default GameList;
 
 const styles = StyleSheet.create({
   container: {
