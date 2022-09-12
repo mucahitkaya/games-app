@@ -6,26 +6,8 @@ import {
   TextInput,
   Pressable,
 } from "react-native";
-// import {
-//   Montserrat_300Light,
-//   Montserrat_400Regular,
-//   Montserrat_500Medium,
-//   Montserrat_600SemiBold,
-//   Montserrat_700Bold,
-// } from "@expo-google-fonts/montserrat";
-import { Acme_400Regular } from "@expo-google-fonts/acme";
-import { useFonts } from "expo-font";
-import { AppLoading } from "expo-app-loading";
 
-function UserLogin(params) {
-  let [fontsLoaded] = useFonts({
-    Acme_400Regular,
-  });
-
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
-
+function UserLogin() {
   return (
     <View style={styles.container}>
       <View style={styles.greetingsContainer}>
@@ -34,19 +16,30 @@ function UserLogin(params) {
       <View style={styles.inputContainer}>
         <View style={styles.usernameContainer}>
           <Text style={styles.inputLabel}>Username:</Text>
-          <TouchableOpacity>
-            <TextInput
-              style={styles.inputBox}
-              placeholder={"Type your username.."}
-            ></TextInput>
-          </TouchableOpacity>
+          <TextInput
+            style={styles.inputBox}
+            maxLength={30}
+            placeholder={"Type your username.."}
+          ></TextInput>
+        </View>
+        <View style={styles.usernameContainer}>
+          <Text style={styles.inputLabel}>Password:</Text>
+          <TextInput
+            style={styles.inputBox}
+            maxLength={8}
+            placeholder={"Type your password.."}
+          ></TextInput>
         </View>
       </View>
-      <View style={styles.denem}>
-        <Pressable>
-          <View style={styles.loginButton}>
-            <Text style={styles.inputLabel}>LOGİN</Text>
-          </View>
+      <View style={styles.loginContainer}>
+        <Pressable
+          style={({ pressed }) =>
+            pressed
+              ? [styles.loginButton, styles.pressed]
+              : [styles.loginButton]
+          }
+        >
+          <Text style={styles.buttonText}>LOGİN</Text>
         </Pressable>
       </View>
     </View>
@@ -60,11 +53,56 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     flexDirection: "column",
   },
-  greetingsContainer: {
+  greetingsContainer: { marginTop: 40 },
+  greetingsText: {
+    textAlign: "center",
+    fontSize: 32,
+    fontWeight: "700",
+  },
+  inputContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  usernameContainer: {
+    alignItems: "center",
+    marginBottom: 15,
+  },
+  inputLabel: {
+    fontSize: 16,
+    fontWeight: "600",
+    textAlign: "center",
+    marginBottom: 10,
+  },
+  inputBox: {
+    width: 210,
+    height: 50,
+    borderWidth: 1,
+    borderRadius: 20,
+    borderColor: "#000000",
+    textAlign: "center",
+    fontSize: 14,
+    fontWeight: "400",
+  },
+  loginContainer: {
+    alignItems: "center",
+  },
+  loginButton: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    fontFamily: " Acme_400Regular ",
+    width: 140,
+    height: 50,
+    borderWidth: 1,
+    borderRadius: 20,
+    backgroundColor: "#BBE7FF",
+    elevation: 5,
   },
-  greetingsText: {},
+  buttonText: {
+    fontSize: 14,
+    fontWeight: "600",
+  },
+  pressed: {
+    opacity: 0.6,
+  },
 });
