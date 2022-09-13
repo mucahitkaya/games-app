@@ -1,4 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
+import { useContext } from "react";
 import {
   View,
   Text,
@@ -8,15 +9,17 @@ import {
   Pressable,
   Image,
 } from "react-native";
+import { UserDatas } from "../context/userData";
 
 function FindTwin() {
-  const navigation = useNavigation();
+  const { users } = useContext(UserDatas);
 
   return (
     <View>
       <View>
         <Pressable>
-          <Text>asfmnafmapsdm</Text>
+          <Text>{users.userName}</Text>
+          <Text>{users.password}</Text>
         </Pressable>
       </View>
     </View>

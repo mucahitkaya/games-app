@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import {
   View,
   Text,
@@ -7,9 +8,13 @@ import {
   Pressable,
   Image,
 } from "react-native";
+import { UserDatas } from "../context/userData";
 
-function GameList({ navigation, route }) {
-  const userName = route.params.userName;
+function GameList({ navigation }) {
+  // if we had send userName as prop we could take it like below
+  // const userName = route.params.userName;
+  const { users } = useContext(UserDatas);
+
   function pressHandler() {
     navigation.navigate("FindTwin");
   }
@@ -20,7 +25,10 @@ function GameList({ navigation, route }) {
           {/* <Image source={require("/assets.asdasd...")}/> */}
         </View>
         <View style={styles.userNameContainer}>
-          <Text style={styles.userNameText}>{userName}</Text>
+          <Text style={styles.userNameText}>{users.userName}</Text>
+        </View>
+        <View style={styles.userNameContainer}>
+          <Text style={styles.userNameText}>{users.time}</Text>
         </View>
       </View>
       <View style={styles.gamesContainer}>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -6,19 +6,28 @@ import {
   TouchableOpacity,
   TextInput,
   Pressable,
+  AppState,
 } from "react-native";
+import { UserDatas } from "../context/userData";
+import { storeUserData } from "../http";
 
 function UserLogin({ navigation }) {
-  const [userName, setUserName] = useState("");
+  const { users, setUsers } = useContext(UserDatas);
 
-  // function userInputHandler() {
-  //   setUserName()
-  // }
+  //This supposed to be run when user focused that page
+  // useEffect(() => {
+  //   AppState.addEventListener("focus", setTime(getTime()));
+  // }, []);
 
+  //Sends props when buton is clicked
   function pressHandler() {
-    navigation.navigate("GamesList", {
-      userName: userName,
-    });
+    // navigation.navigate("GamesList", {
+    //   userName: users.userName,
+    //   currentTime: time,
+    // });
+    //ABOVE CODE is sends prop
+    navigation.navigate("GamesList");
+    storeUserData(users);
   }
   return (
     <View style={styles.container}>
@@ -32,7 +41,14 @@ function UserLogin({ navigation }) {
             style={styles.inputBox}
             maxLength={30}
             placeholder={"Type your username.."}
-            onChangeText={(text) => setUserName(text)}
+            onChangeText={(text) =>
+              setUsers((prevUsers) => {
+                return {
+                  ...prevUsers,
+                  userName: text,
+                };
+              })
+            }
           ></TextInput>
         </View>
         <View style={styles.usernameContainer}>
@@ -40,6 +56,14 @@ function UserLogin({ navigation }) {
           <TextInput
             style={styles.inputBox}
             maxLength={8}
+            onChangeText={(text) =>
+              setUsers((prevUsers) => {
+                return {
+                  ...prevUsers,
+                  password: text,
+                };
+              })
+            }
             placeholder={"Type your password.."}
           ></TextInput>
         </View>
