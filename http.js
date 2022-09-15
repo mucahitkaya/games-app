@@ -1,7 +1,7 @@
 import axios from "axios";
 
 //buraya urli değişken olarak koy push atmadan önce kaldır
-const BACKEND_URL = "https://gamesdeneme1-default-rtdb.firebaseio.com";
+const BACKEND_URL = "asdsd";
 
 export function storeUserData(userData) {
   axios.post(`${BACKEND_URL}/users.json`, userData);
