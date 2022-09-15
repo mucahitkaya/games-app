@@ -1,26 +1,22 @@
 import { View, Text, StyleSheet } from "react-native";
-import AuthForm from "../auth/AuthForm";
+import AuthContent from "../auth/AuthContent";
 
-function UserLoginIn({}) {
+function UserLoginIn() {
   return (
-    <View style={styles.container}>
+    <>
       <View style={styles.greetingsContainer}>
         <Text style={styles.greetingsText}>Hoşgeldiniz</Text>
       </View>
-      <AuthForm isLogin />
-    </View>
+      <AuthContent isLogin />
+    </>
   );
 }
 export default UserLoginIn;
 
 const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    flex: 1,
-    justifyContent: "space-around",
-    flexDirection: "column",
+  greetingsContainer: {
+    marginVertical: 40,
   },
-  greetingsContainer: { marginTop: 40 },
   greetingsText: {
     textAlign: "center",
     fontSize: 32,

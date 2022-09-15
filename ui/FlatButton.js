@@ -1,14 +1,16 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 function FlatButton({ children, onPress }) {
   return (
-    <Pressable
-      style={({ pressed }) => [styles.button, pressed && styles.pressed]}
-      onPress={onPress}
-    >
-      <View>
-        <Text style={styles.buttonText}>{children}</Text>
-      </View>
-    </Pressable>
+    <View>
+      <Pressable
+        style={({ pressed }) => [styles.button, pressed && styles.pressed]}
+        onPress={onPress}
+      >
+        <View>
+          <Text style={styles.buttonText}>{children}</Text>
+        </View>
+      </Pressable>
+    </View>
   );
 }
 

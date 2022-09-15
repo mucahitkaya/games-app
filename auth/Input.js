@@ -9,22 +9,20 @@ function Input({
   isInvalid,
 }) {
   return (
-    <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <View style={styles.usernameContainer}>
-          <Text style={[styles.inputLabel, isInvalid && styles.inputInvalid]}>
-            {label}:
-          </Text>
-          <TextInput
-            style={[styles.inputBox, isInvalid && styles.inputInvalid]}
-            autoCapitalize={false}
-            secureTextEntry={secure}
-            onChangeText={onUpdateValue}
-            keyboardType={keyboardType}
-            value={value}
-            placeholder={`Type your ${label}..`}
-          ></TextInput>
-        </View>
+    <View style={styles.inputContainer}>
+      <View style={styles.usernameContainer}>
+        <Text style={[styles.inputLabel, isInvalid && styles.inputInvalid]}>
+          {label}:
+        </Text>
+        <TextInput
+          style={[styles.inputBox, isInvalid && styles.inputInvalid]}
+          autoCapitalize={false}
+          secureTextEntry={secure}
+          onChangeText={onUpdateValue}
+          keyboardType={keyboardType}
+          value={value}
+          placeholder={`Type your ${label}..`}
+        ></TextInput>
       </View>
     </View>
   );
@@ -32,22 +30,11 @@ function Input({
 export default Input;
 
 const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    flex: 1,
-    justifyContent: "space-around",
-    flexDirection: "column",
-  },
-  greetingsContainer: { marginTop: 40 },
-  greetingsText: {
-    textAlign: "center",
-    fontSize: 32,
-    fontWeight: "700",
-  },
   inputContainer: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    marginVertical: 10,
   },
   usernameContainer: {
     alignItems: "center",

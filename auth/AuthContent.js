@@ -2,10 +2,10 @@ import { useState } from "react";
 import { Alert, StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AuthForm from "./AuthForm";
+import FlatButton from "../ui/FlatButton";
 
 function AuthContent({ isLogin, onAuthenticate }) {
   const navigation = useNavigation();
-
   const [credentialsInvalid, setCredentialsInvalid] = useState({
     email: false,
     password: false,
@@ -13,7 +13,7 @@ function AuthContent({ isLogin, onAuthenticate }) {
     confirmPassword: false,
   });
 
-  function switchauthModeHandler() {
+  function switchAuthModeHandler() {
     if (isLogin) {
       navigation.navigate("UserSignUp");
     } else {
@@ -27,7 +27,7 @@ function AuthContent({ isLogin, onAuthenticate }) {
     email = email.trim();
     password = password.trim();
 
-    const emailIsValid = email.include("@");
+    const emailIsValid = email.includes("@");
     const passwordIsValid = password.length > 6;
     const emailsAreEqual = email === confirmEmail;
     const passwordsAreEqual = password === confirmPassword;
@@ -50,17 +50,15 @@ function AuthContent({ isLogin, onAuthenticate }) {
   }
 
   return (
-    <View style={styles.autContent}>
+    <View style={styles.authContent}>
       <AuthForm
         isLogin={isLogin}
         onSubmit={submitHandler}
         credentialsInvalid={credentialsInvalid}
       />
-      <View style={styles.buttons}>
-        <FlatButton onPress={switchauthModeHandler}>
-          {isLogin ? "create a new user" : "Log in instead"}
-        </FlatButton>
-      </View>
+      <FlatButton onPress={switchAuthModeHandler}>
+        {isLogin ? "Create a new user" : "Log in instead"}
+      </FlatButton>
     </View>
   );
 }
@@ -68,14 +66,13 @@ function AuthContent({ isLogin, onAuthenticate }) {
 export default AuthContent;
 
 const styles = StyleSheet.create({
-  autContent: {
-    marginTop: 64,
-    marginHorizontal: 32,
-    padding: 16,
-    borderRadius: 8,
-    backgroundColor: "#E8EAED",
-    elevation: 2,
+  authContent: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 400,
   },
+
   buttons: {
     marginTop: 8,
   },
