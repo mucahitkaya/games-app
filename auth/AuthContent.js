@@ -6,6 +6,7 @@ import FlatButton from "../ui/FlatButton";
 
 function AuthContent({ isLogin, onAuthenticate }) {
   const navigation = useNavigation();
+
   const [credentialsInvalid, setCredentialsInvalid] = useState({
     email: false,
     password: false,

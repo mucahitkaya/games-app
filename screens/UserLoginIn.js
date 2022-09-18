@@ -1,13 +1,34 @@
-import { View, Text, StyleSheet } from "react-native";
+import { useContext, useState } from "react";
+import { View, Text, StyleSheet, Alert } from "react-native";
 import AuthContent from "../auth/AuthContent";
+import Loading from "../components/Loading";
+import { login } from "../util/auth";
 
 function UserLoginIn() {
+  const authCtx = useContext(AuthContent);
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
+
+  async function loginHandler({ email, password }) {
+    setIsAuthenticating(true);
+    try {
+      const token = await login(email, password);
+      authCtx.authhenticate(token);
+    } catch (error) {
+      Alert.alert("Authentication Failed", "Check Credentials");
+    }
+    setIsAuthenticating(false);
+  }
+
+  if (isAuthenticating) {
+    return <Loading message="You are logging in" />;
+  }
+
   return (
     <>
       <View style={styles.greetingsContainer}>
         <Text style={styles.greetingsText}>Hoşgeldiniz</Text>
       </View>
-      <AuthContent isLogin />
+      <AuthContent isLogin onAuthenticate={loginHandler} />
     </>
   );
 }

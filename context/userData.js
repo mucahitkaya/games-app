@@ -1,6 +1,11 @@
 import { createContext, useState } from "react";
 
-const UserDatas = createContext({});
+const UserDatas = createContext({
+  token: "",
+  isAuthenticated: false,
+  authenticate: (token) => {},
+  logout: () => {},
+});
 
 function UserDatasProvider({ children }) {
   function getTime() {
@@ -18,6 +23,16 @@ function UserDatasProvider({ children }) {
     return nowDateandTime;
   }
 
+  const [authToken, setAuthToken] = useState();
+
+  function authenticate(token) {
+    setAuthToken(token);
+  }
+
+  function logout() {
+    setAuthToken(null);
+  }
+
   const [users, setUsers] = useState({
     userName: "",
     password: "",
@@ -26,6 +41,10 @@ function UserDatasProvider({ children }) {
   const values = {
     users,
     setUsers,
+    token: authToken,
+    isAuthenticated: !!authToken,
+    authenticate: authenticate,
+    logout: logout,
   };
 
   return <UserDatas.Provider value={values}>{children}</UserDatas.Provider>;
