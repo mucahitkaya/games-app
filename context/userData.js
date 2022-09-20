@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 
-const UserDatas = createContext({
+export const UserDatas = createContext({
   token: "",
   isAuthenticated: false,
   authenticate: (token) => {},
@@ -49,4 +49,4 @@ function UserDatasProvider({ children }) {
 
   return <UserDatas.Provider value={values}>{children}</UserDatas.Provider>;
 }
-export { UserDatasProvider, UserDatas };
+export default UserDatasProvider;

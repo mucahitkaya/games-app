@@ -8,7 +8,9 @@ import AuthForm from "./auth/AuthForm";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
-import { UserDatasProvider, UserDatas } from "./context/userData";
+import UserDatasProvider from "./context/userData";
+import { UserDatas } from "./context/userData";
+import { useContext } from "react";
 
 const Stack = createNativeStackNavigator();
 
@@ -51,9 +53,12 @@ function AuthenticatedStack() {
 }
 
 function Navigation() {
+  const authCtx = useContext(UserDatas);
+
   return (
     <NavigationContainer>
-      <AuthStack />
+      {!authCtx.isAuthenticated && <AuthStack />}
+      {authCtx.isAuthenticated && <AuthenticatedStack />}
     </NavigationContainer>
   );
 }

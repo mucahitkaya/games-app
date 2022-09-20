@@ -3,7 +3,7 @@ import { Alert } from "react-native";
 import AuthContent from "../auth/AuthContent";
 import Loading from "../components/Loading";
 import { createUser } from "../util/auth";
-
+import { UserDatas } from "../context/userData";
 function UserSignUp() {
   const authCtx = useContext(UserDatas);
 

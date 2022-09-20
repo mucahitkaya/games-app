@@ -1,20 +1,22 @@
 import { useContext, useState } from "react";
 import { View, Text, StyleSheet, Alert } from "react-native";
-import AuthContent from "../auth/AuthContent";
+import { UserDatas } from "../context/userData";
 import Loading from "../components/Loading";
 import { login } from "../util/auth";
+import AuthContent from "../auth/AuthContent";
 
 function UserLoginIn() {
-  const authCtx = useContext(AuthContent);
+  const authCtx = useContext(UserDatas);
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
   async function loginHandler({ email, password }) {
     setIsAuthenticating(true);
     try {
       const token = await login(email, password);
-      authCtx.authhenticate(token);
+      authCtx.authenticate(token);
     } catch (error) {
-      Alert.alert("Authentication Failed", "Check Credentials");
+      // Alert.alert(error.message);
+      console.log(error.message);
     }
     setIsAuthenticating(false);
   }
