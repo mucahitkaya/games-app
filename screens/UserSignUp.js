@@ -24,6 +24,7 @@ function UserSignUp() {
     return <Loading message="aaaaaaa aaa aaa" />;
   }
   // there is a function in AuthContent so we bind this submit handler with onauthenticate
+  //todo
   return <AuthContent onAuthenticate={submitHandler} />;
 }
 
