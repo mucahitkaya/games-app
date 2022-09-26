@@ -15,8 +15,14 @@ function GameList({ navigation }) {
   // const userName = route.params.userName;
   const { users } = useContext(UserDatas);
 
-  function pressHandler() {
-    navigation.navigate("FindTwin");
+  function pressHandler(id) {
+    if (id === 1) {
+      navigation.navigate("FindTwin");
+    } else if (id === 2) {
+      navigation.navigate("Todo");
+    } else {
+      navigation.navigate("EngWords");
+    }
   }
   return (
     <View style={styles.container}>
@@ -35,19 +41,19 @@ function GameList({ navigation }) {
         <View>
           <Text style={styles.suggestText}>Lütfen bir oyun seçiniz</Text>
         </View>
-        <Pressable onPress={pressHandler}>
+        <Pressable onPress={() => pressHandler(1)}>
           <View style={styles.gameContainer}>
             <Text style={styles.gameText}>Find-Twin</Text>
           </View>
         </Pressable>
-        <Pressable>
+        <Pressable onPress={() => pressHandler(2)}>
           <View style={styles.gameContainer}>
-            <Text style={styles.gameText}>Make This Number</Text>
+            <Text style={styles.gameText}>To-do's</Text>
           </View>
         </Pressable>
-        <Pressable>
+        <Pressable onPress={() => pressHandler(3)}>
           <View style={styles.gameContainer}>
-            <Text style={styles.gameText}>Type Faster</Text>
+            <Text style={styles.gameText}>EngWords</Text>
           </View>
         </Pressable>
         <Pressable>

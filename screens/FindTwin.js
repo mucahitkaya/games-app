@@ -37,6 +37,7 @@ function FindTwin() {
   );
 }
 export default FindTwin;
+
 const styles = StyleSheet.create({
   container: {
     display: "flex",
