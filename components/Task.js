@@ -16,21 +16,20 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    marginVertical: 10,
+    marginBottom: 10,
   },
   usernameContainer: {
-    alignItems: "center",
-    marginBottom: 15,
-  },
-
-  inputBox: {
-    width: 210,
-    height: 50,
+    justifyContent: "center",
+    alignItems: "flex-start",
+    paddingLeft: 16,
+    width: 345,
+    height: 35,
     borderWidth: 1,
-    borderRadius: 20,
-    borderColor: "#000000",
-    textAlign: "center",
-    fontSize: 14,
+    borderRadius: 15,
+  },
+  inputBox: {
+    color: "#2F7676",
+    fontSize: 24,
     fontWeight: "400",
   },
 });

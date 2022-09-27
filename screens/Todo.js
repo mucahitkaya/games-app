@@ -36,7 +36,7 @@ export default function Todo() {
         }}
         keyboardShouldPersistTaps="handled"
       >
-        <Text style={styles.sectionTitle}>Today's Tasks</Text>
+        <Text style={styles.tasktitle}>Today's Tasks</Text>
         <View style={styles.items}>
           {taskItems.map((item, index) => {
             return (
@@ -88,8 +88,9 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderColor: "#000000",
     textAlign: "center",
-    fontSize: 14,
+    fontSize: 24,
     fontWeight: "400",
+    color: "#2e7676",
   },
   addWrapper: {
     display: "flex",
