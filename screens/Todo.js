@@ -10,7 +10,7 @@ import {
   ScrollView,
   Keyboard,
 } from "react-native";
-import Task from "../components/Task";
+import Item from "../components/Item";
 
 export default function Todo() {
   const [task, setTask] = useState();
@@ -45,7 +45,7 @@ export default function Todo() {
                 onPress={(index) => completeTask(index)}
               >
                 <View>
-                  <Task todo={item} />
+                  <Item item={item} />
                 </View>
               </TouchableOpacity>
             );

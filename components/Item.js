@@ -1,15 +1,15 @@
 import { View, Text, StyleSheet } from "react-native";
 
-function Task(props) {
+function Item(props) {
   return (
     <View style={styles.inputContainer}>
       <View style={styles.usernameContainer}>
-        <Text style={styles.inputBox}>{props.todo}</Text>
+        <Text style={styles.inputBox}>{props.item}</Text>
       </View>
     </View>
   );
 }
-export default Task;
+export default Item;
 
 const styles = StyleSheet.create({
   inputContainer: {

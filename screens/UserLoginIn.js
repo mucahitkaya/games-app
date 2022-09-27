@@ -6,13 +6,22 @@ import { login } from "../util/auth";
 import AuthContent from "../auth/AuthContent";
 
 function UserLoginIn() {
+  //Getting global datas from context
   const authCtx = useContext(UserDatas);
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
+  //Login handling async
+  //email&password depends on the onAuthenticate(they comes from there)
   async function loginHandler({ email, password }) {
     setIsAuthenticating(true);
+
     try {
+      //Login imported from auth &
+      //does send email&passwpord data to function which is in the auth file
+      //and waits for token that returns
       const token = await login(email, password);
+
+      //When the token came we saved it via state in userData file
       authCtx.authenticate(token);
     } catch (error) {
       // Alert.alert(error.message);
@@ -21,6 +30,8 @@ function UserLoginIn() {
     setIsAuthenticating(false);
   }
 
+  //if authenticating process will takes while then this component will be
+  // rendered till authenticate is done
   if (isAuthenticating) {
     return <Loading message="You are logging in" />;
   }
@@ -46,46 +57,3 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
 });
-// const { users, setUsers } = useContext(UserDatas);
-
-// //This supposed to be run when user focused that page
-// // useEffect(() => {
-// //   AppState.addEventListener("focus", setTime(getTime()));
-// // }, []);
-
-// //Sends props when buton is clicked
-// function pressHandler() {
-//   // navigation.navigate("GamesList", {
-//   //   userName: users.userName,
-//   //   currentTime: time,
-//   // });
-//   //ABOVE CODE is sends prop
-//   navigation.navigate("AuthForm");
-//   storeUserData(users);
-// }
-
-// inputContainer: {
-//   display: "flex",
-//   flexDirection: "column",
-//   alignItems: "center",
-// },
-// usernameContainer: {
-//   alignItems: "center",
-//   marginBottom: 15,
-// },
-// inputLabel: {
-//   fontSize: 16,
-//   fontWeight: "600",
-//   textAlign: "center",
-//   marginBottom: 10,
-// },
-// inputBox: {
-//   width: 210,
-//   height: 50,
-//   borderWidth: 1,
-//   borderRadius: 20,
-//   borderColor: "#000000",
-//   textAlign: "center",
-//   fontSize: 14,
-//   fontWeight: "400",
-// },

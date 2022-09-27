@@ -9,6 +9,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
   const [enteredPassword, setEnteredPassword] = useState("");
   const [enteredConfirmPassword, setEnteredConfirmPassword] = useState("");
 
+  // object destructuring
   const {
     email: emailIsInvalid,
     confirmEmail: emailsDontMatch,
@@ -34,6 +35,7 @@ function AuthForm({ isLogin, onSubmit, credentialsInvalid }) {
   }
 
   function submitHandler() {
+    // onSubmit comes here as a prop & returns object(credentials)
     onSubmit({
       email: enteredEmail,
       confirmEmail: enteredConfirmEmail,
