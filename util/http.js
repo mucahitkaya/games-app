@@ -1,10 +1,16 @@
 import axios from "axios";
 
 //buraya urli değişken olarak koy push atmadan önce kaldır
-const BACKEND_URL = "asdsd";
+const BACKEND_URL = "31";
 
-export function storeUserData(userData) {
-  axios.post(`${BACKEND_URL}/users.json`, userData);
+export function storeWordsList(newWords) {
+  axios.post(`${BACKEND_URL}/newWords.json`, newWords);
+}
+
+export async function fetchWords() {
+  const response = await axios.get(`${BACKEND_URL}/newWords.json`);
+
+  console.log(response.data);
 }
 
 // export async function fetchUsers() {

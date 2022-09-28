@@ -5,6 +5,7 @@ export const UserDatas = createContext({
   isAuthenticated: false,
   authenticate: (token) => {},
   logout: () => {},
+  newWord: "",
 });
 
 function UserDatasProvider({ children }) {
@@ -24,7 +25,7 @@ function UserDatasProvider({ children }) {
   }
 
   const [authToken, setAuthToken] = useState();
-
+  const [wordsList, setWordsList] = useState([]);
   function authenticate(token) {
     setAuthToken(token);
   }
@@ -46,6 +47,8 @@ function UserDatasProvider({ children }) {
     isAuthenticated: !!authToken,
     authenticate: authenticate,
     logout: logout,
+    wordsList: wordsList,
+    getTime: getTime,
   };
 
   return <UserDatas.Provider value={values}>{children}</UserDatas.Provider>;

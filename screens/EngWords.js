@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -9,15 +9,26 @@ import {
   TextInput,
 } from "react-native";
 import Item from "../components/Item";
+import { UserDatas } from "../context/userData";
+import { fetchWords, storeWordsList } from "../util/http";
 
 export default function EngWords() {
-  const [word, setWord] = useState();
-  const [wordsList, setWordsList] = useState([]);
+  const newWord = useContext(UserDatas);
+  const [word, setWord] = useState("");
+  const [wordsList, setWordsList] = useState({});
+  const [showWords, setShowWords] = useState(false);
 
   function wordAdd() {
     Keyboard.dismiss();
-    setWordsList([...wordsList, word]);
-    setWord(null);
+    setWordsList((currentList) => {
+      return {
+        ...currentList,
+        word: word,
+        date: new Date(),
+      };
+    });
+    // setWordsList([...wordsList, word]);
+    storeWordsList(wordsList);
   }
 
   function deleteWords(index) {
@@ -26,19 +37,30 @@ export default function EngWords() {
     setWordsList(wordsCopy);
   }
 
+  function showEngWords() {
+    setShowWords(!showWords);
+    fetchWords();
+  }
+  const obj = { 1: "yeter", 2: "yaaa", 3: "asdasd" };
+  let newArray = [];
+  for (let element in obj) {
+    console.log(obj[element]);
+  }
+
   return (
     <View>
       <View>
-        {wordsList.map((item, index) => {
-          return (
-            <TouchableOpacity
-              key={index}
-              onPress={(index) => deleteWords(index)}
-            >
-              <Item item={item} />
-            </TouchableOpacity>
-          );
-        })}
+        {/* {showWords &&
+          wordsList.map((item, index) => {
+            return (
+              <TouchableOpacity
+                key={index}
+                onPress={(index) => deleteWords(index)}
+              >
+                <Item item={item} />
+              </TouchableOpacity>
+            );
+          })} */}
       </View>
       <View style={styles.inputContainer}>
         <KeyboardAvoidingView
@@ -56,6 +78,11 @@ export default function EngWords() {
               <Text style={styles.addText}>+</Text>
             </View>
           </TouchableOpacity>
+          <TouchableOpacity onPress={() => showEngWords()}>
+            <View style={styles.addWrapper}>
+              <Text style={styles.addText}>S</Text>
+            </View>
+          </TouchableOpacity>
         </KeyboardAvoidingView>
       </View>
     </View>
@@ -70,7 +97,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   inputBox: {
-    width: 280,
+    width: 240,
     height: 50,
     borderWidth: 1,
     borderRadius: 20,
